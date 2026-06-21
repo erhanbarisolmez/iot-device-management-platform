@@ -1,5 +1,15 @@
 # IoT Device Management Platform
 
+![Java](https://img.shields.io/badge/Java-17-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3-brightgreen?logo=springboot)
+![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-3.6-231F20?logo=apachekafka)
+![MQTT](https://img.shields.io/badge/MQTT-ESP32-660066?logo=mqtt)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-ready-326CE5?logo=kubernetes)
+![Helm](https://img.shields.io/badge/Helm-chart-0F1689?logo=helm)
+![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker)
+![GitHub last commit](https://img.shields.io/github/last-commit/erhanbarisolmez/iot-device-management-platform)
+![GitHub repo size](https://img.shields.io/github/repo-size/erhanbarisolmez/iot-device-management-platform)
+
 IoT smart lock management platform built with Spring Boot. Manages ESP32-based smart lock devices via MQTT, handles payment processing through Iyzico, sends SMS notifications via Twilio, and streams all events through Apache Kafka with Avro serialization.
 
 ## Architecture
