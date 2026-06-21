@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.selftech.selfparkbackendv001.models.user.User;
+import com.selftech.smartlock.shared.model.User;
 import com.selftech.smartlock.models.dto.enums.LockStatus;
 
 import jakarta.persistence.CascadeType;

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.selftech.selfparkbackendv001.models.user.User;
+import com.selftech.smartlock.shared.model.User;
 import com.selftech.smartlock.event.kafka.publisher.LockBoxEventPublisherService;
 import com.selftech.smartlock.models.dto.enums.OperationType;
 import com.selftech.smartlock.models.entity.BoxOperation;

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: iot-device-management-platform
+description: IoT smart lock management platform with MQTT, payment, and SMS
+type: application
+version: 0.1.0
+appVersion: "0.0.1-SNAPSHOT"

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iyzipay.model.Payment;
-import com.selftech.selfparkbackendv001.utilities.mappers.ModelMapperService;
+import com.selftech.smartlock.shared.mapper.ModelMapperService;
 import com.selftech.smartlock.models.dto.response.PenaltyCalculationResponseDTO;
 import com.selftech.smartlock.models.entity.DeviceOperation;
 import com.selftech.smartlock.service.abstracts.ILockBoxOperationService;

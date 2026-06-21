@@ -3,7 +3,7 @@ package com.selftech.smartlock.service.abstracts;
 import java.util.List;
 import java.util.Optional;
 
-import com.selftech.selfparkbackendv001.models.user.User;
+import com.selftech.smartlock.shared.model.User;
 import com.selftech.smartlock.models.dto.request.lockDevice.LockDeviceRequest;
 import com.selftech.smartlock.models.entity.LockDevice;
 

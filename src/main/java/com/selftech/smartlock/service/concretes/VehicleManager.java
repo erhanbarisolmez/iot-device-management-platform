@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
-import com.selftech.selfparkbackendv001.models.Plate;
-import com.selftech.selfparkbackendv001.repository.PlateDao;
+import com.selftech.smartlock.shared.model.Plate;
+import com.selftech.smartlock.shared.repository.PlateRepository;
 import com.selftech.smartlock.models.entity.Vehicle;
 import com.selftech.smartlock.repository.VehicleRepository;
 import com.selftech.smartlock.service.abstracts.IVehicleService;
@@ -19,10 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 public class VehicleManager implements IVehicleService {
 
   private final VehicleRepository vehicleRepository;
-  private final PlateDao plateDao;
+  private final PlateRepository plateRepository;
 
   public Vehicle createVehicleForPlate(String plateNumber) {
-    Plate plate = plateDao.findPlateByPlateNumber(plateNumber);
+    Plate plate = plateRepository.findPlateByPlateNumber(plateNumber);
     log.info("Vehicle find={}", plate);
     if (plate == null) {
       log.error("Vehicle find null={}", plate);

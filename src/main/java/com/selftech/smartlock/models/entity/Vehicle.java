@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.selftech.selfparkbackendv001.models.Plate;
-import com.selftech.selfparkbackendv001.models.user.User;
+import com.selftech.smartlock.shared.model.Plate;
+import com.selftech.smartlock.shared.model.User;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

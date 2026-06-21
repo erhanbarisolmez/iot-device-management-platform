@@ -3,7 +3,7 @@ package com.selftech.smartlock.models.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.selftech.selfparkbackendv001.models.user.User;
+import com.selftech.smartlock.shared.model.User;
 import com.selftech.smartlock.models.dto.enums.LockStatus;
 import com.selftech.smartlock.models.dto.enums.OperationType;
 import com.selftech.smartlock.models.dto.enums.PaymentStatus;

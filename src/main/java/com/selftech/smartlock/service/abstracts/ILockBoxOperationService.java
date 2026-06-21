@@ -1,6 +1,6 @@
 package com.selftech.smartlock.service.abstracts;
 
-import com.selftech.selfparkbackendv001.models.user.User;
+import com.selftech.smartlock.shared.model.User;
 import com.selftech.smartlock.models.dto.request.sensor.SensorDataRequest;
 import com.selftech.smartlock.models.entity.DeviceOperation;
 

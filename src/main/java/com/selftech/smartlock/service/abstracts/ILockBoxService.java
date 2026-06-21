@@ -2,7 +2,7 @@ package com.selftech.smartlock.service.abstracts;
 
 import java.util.List;
 
-import com.selftech.selfparkbackendv001.models.user.User;
+import com.selftech.smartlock.shared.model.User;
 import com.selftech.smartlock.models.entity.LockBox;
 
 public interface ILockBoxService {

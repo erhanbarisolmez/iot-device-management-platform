@@ -24,9 +24,20 @@
             <id>confluent</id>
             <url>https://packages.confluent.io/maven/</url>
         </repository>
+        <repository>
+            <id>github-kafka-infra</id>
+            <url>https://maven.pkg.github.com/erhanbarisolmez/spring-kafka-infrastructure</url>
+        </repository>
     </repositories>
 
     <dependencies>
+        <!-- Kafka Infrastructure Library -->
+        <dependency>
+            <groupId>com.selftech</groupId>
+            <artifactId>spring-kafka-infrastructure</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

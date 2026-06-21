@@ -209,6 +209,17 @@ src/main/java/com/selftech/smartlock/
 - Iyzico merchant account (for payment processing)
 - Twilio account (for SMS notifications)
 
+## Dependencies
+
+This service depends on the shared [spring-kafka-infrastructure](https://github.com/erhanbarisolmez/spring-kafka-infrastructure) library, which provides Kafka topic registry, event coordination, DLQ management, and outbox pattern support.
+
+```
+spring-kafka-infrastructure (Maven library)
+         │
+         ▼
+iot-device-management-platform (this service)
+```
+
 ## Getting Started
 
 1. **Clone the repository**
@@ -217,7 +228,14 @@ src/main/java/com/selftech/smartlock/
    cd iot-device-management-platform
    ```
 
-2. **Configure environment variables**
+2. **Install the shared library** (if not published to GitHub Packages yet)
+   ```bash
+   cd ../spring-kafka-infrastructure
+   mvn clean install
+   cd ../iot-device-management-platform
+   ```
+
+3. **Configure environment variables**
    ```bash
    # Database
    export SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/smartlock
@@ -244,17 +262,51 @@ src/main/java/com/selftech/smartlock/
    export IYZICO_SECRET_KEY=your-secret-key
    ```
 
-3. **Build the project**
+4. **Build the project**
    ```bash
    mvn clean install
    ```
 
-4. **Run the application**
+5. **Run the application**
    ```bash
    mvn spring-boot:run
    ```
 
-5. **Access API documentation**
+6. **Access API documentation**
    ```
    http://localhost:8080/swagger-ui.html
    ```
+
+## Docker
+
+```bash
+# Build
+mvn clean package -DskipTests
+docker build -t erhanbarisolmez/iot-device-management-platform:latest .
+
+# Run
+docker run -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/smartlock \
+  -e SPRING_DATASOURCE_USERNAME=postgres \
+  -e SPRING_DATASOURCE_PASSWORD=postgres \
+  -e KAFKA_BOOTSTRAP_SERVERS=kafka:9092 \
+  -e KAFKA_SCHEMA_REGISTRY_URL=http://schema-registry:8081 \
+  -e MQTT_BROKER_URL=tcp://mosquitto:1883 \
+  -e JWT_SECRET_KEY=your-secret-key \
+  erhanbarisolmez/iot-device-management-platform:latest
+```
+
+## Kubernetes / Helm
+
+```bash
+# Install with Helm
+helm install smartlock ./helm \
+  --set image.tag=latest \
+  --namespace selftech --create-namespace
+
+# Upgrade
+helm upgrade smartlock ./helm --set image.tag=v1.0.0
+
+# Uninstall
+helm uninstall smartlock
+```

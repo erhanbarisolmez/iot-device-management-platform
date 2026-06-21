@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.selftech.selfparkbackendv001.models.user.User;
+import com.selftech.smartlock.shared.model.User;
 import com.selftech.smartlock.models.entity.DeviceOperation;
 import com.selftech.smartlock.service.concretes.LockBoxOperationManager;
 import com.selftech.smartlock.utils.exceptions.SmartLockException;

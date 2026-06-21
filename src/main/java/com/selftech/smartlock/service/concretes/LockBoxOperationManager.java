@@ -10,8 +10,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.selftech.selfparkbackendv001.models.user.Role;
-import com.selftech.selfparkbackendv001.models.user.User;
+import com.selftech.smartlock.shared.model.Role;
+import com.selftech.smartlock.shared.model.User;
 import com.selftech.smartlock.event.kafka.publisher.LockDeviceEventPublisherService;
 import com.selftech.smartlock.models.dto.enums.BoxStatus;
 import com.selftech.smartlock.models.dto.enums.LockStatus;

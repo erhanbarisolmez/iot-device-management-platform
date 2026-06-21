@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.selftech.selfparkbackendv001.models.user.User;
-import com.selftech.selfparkbackendv001.utilities.mappers.ModelMapperService;
+import com.selftech.smartlock.shared.model.User;
+import com.selftech.smartlock.shared.mapper.ModelMapperService;
 import com.selftech.smartlock.models.dto.request.lockDevice.LockDeviceRequest;
 import com.selftech.smartlock.models.entity.LockDevice;
 import com.selftech.smartlock.service.concretes.LockDeviceManager;

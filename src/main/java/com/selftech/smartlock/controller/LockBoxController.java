@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.selftech.selfparkbackendv001.models.user.User;
-import com.selftech.selfparkbackendv001.utilities.mappers.ModelMapperService;
+import com.selftech.smartlock.shared.model.User;
+import com.selftech.smartlock.shared.mapper.ModelMapperService;
 import com.selftech.smartlock.models.dto.request.lockBox.LockBoxAddRequest;
 import com.selftech.smartlock.models.dto.request.lockBox.LockBoxUpdateRequest;
 import com.selftech.smartlock.models.dto.request.lockBox.OpenBoxRequest;
