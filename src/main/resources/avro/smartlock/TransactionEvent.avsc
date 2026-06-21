@@ -1,0 +1,103 @@
+{
+  "type": "record",
+  "name": "TransactionEvent",
+  "namespace": "com.selftech.smartlock.avro",
+  "doc": "Müşteri işlem olayları (cihaz alma, iade, kod doğrulama, vb.)",
+  "interfaces": ["com.selftech.kafka.core.event.Event"],
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string",
+      "doc": "Olayın benzersiz kimliği (UUID)"
+    },
+    {
+      "name": "transactionId",
+      "type": "string",
+      "doc": "İşlem ID"
+    },
+    {
+      "name": "eventType",
+      "type": "string",
+      "doc": "Olay türü: DeviceRetrieved, DeviceReturned, CodeValidated, CodeGeneratedForPersonnel, etc."
+    },
+    {
+      "name": "userId",
+      "type": "string",
+      "doc": "İşlemi yapan kullanıcı ID (partition key olabilir)"
+    },
+    {
+      "name": "deviceCode",
+      "type": "string",
+      "doc": "İlişkili cihaz kodu"
+    },
+    {
+      "name": "boxCode",
+      "type": "string",
+      "doc": "İlişkili kutu kodu"
+    },
+    {
+      "name": "lockCode",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "İlişkili kilit kodu"
+    },
+    {
+      "name": "result",
+      "type": "string",
+      "doc": "İşlem sonucu: SUCCESS, FAILED, REJECTED, TIMEOUT"
+    },
+    {
+      "name": "reason",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Başarısızlık veya ret nedeni"
+    },
+    {
+      "name": "attemptCount",
+      "type": "int",
+      "default": 1,
+      "doc": "Deneme sayısı (başarısız deneme)"
+    },
+    {
+      "name": "operationType",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "İşlem türü (enum name): LOCK_DEVICE, UNLOCK_DEVICE, RETURN_TO_BOX, etc."
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Olayın oluş zamanı"
+    },
+    {
+      "name": "duration",
+      "type": ["null", "long"],
+      "default": null,
+      "doc": "İşlem süresi (milliseconds)"
+    },
+    {
+      "name": "correlationId",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Distributed tracing için correlation ID"
+    },
+    {
+      "name": "schemaVersion",
+      "type": "string",
+      "default": "1.0",
+      "doc": "Avro schema versiyonu"
+    },
+    {
+      "name": "metadata",
+      "type": ["null", {
+        "type": "map",
+        "values": "string"
+      }],
+      "default": null,
+      "doc": "Ek bilgiler"
+    }
+  ]
+}

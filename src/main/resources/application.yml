@@ -1,0 +1,135 @@
+spring:
+  application:
+    name: iot-device-management-platform
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/smartlock}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    properties:
+      schema.registry.url: ${KAFKA_SCHEMA_REGISTRY_URL:http://localhost:8081}
+    producer:
+      acks: 1
+      retries: 5
+      properties:
+        schema.registry.url: ${KAFKA_SCHEMA_REGISTRY_URL:http://localhost:8081}
+        enable.idempotence: "true"
+        linger.ms: "10"
+        batch.size: "32768"
+        compression.type: snappy
+    consumer:
+      group-id: smartlock-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      max-poll-records: 500
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      properties:
+        schema.registry.url: ${KAFKA_SCHEMA_REGISTRY_URL:http://localhost:8081}
+        specific.avro.reader: true
+
+# JWT Configuration
+jwt:
+  secret-key: ${JWT_SECRET_KEY:your-secret-key-here}
+  expiration-ms: ${JWT_EXPIRATION_MS:3600000}
+
+# Twilio SMS Configuration
+twilio:
+  account:
+    sid: ${TWILIO_ACCOUNT_SID:}
+  auth:
+    token: ${TWILIO_AUTH_TOKEN:}
+  trial:
+    number: ${TWILIO_PHONE_NUMBER:}
+
+# Iyzico Payment Configuration
+iyzico:
+  api-key: ${IYZICO_API_KEY:}
+  secret-key: ${IYZICO_SECRET_KEY:}
+  base-url: ${IYZICO_BASE_URL:https://sandbox-api.iyzipay.com}
+
+# Application Configuration
+app:
+  base-url: ${APP_BASE_URL:https://localhost:8443}
+  callback-url: ${APP_CALLBACK_URL:https://localhost:8443/payment/callback}
+  kafka:
+    default-partitions: ${KAFKA_DEFAULT_PARTITIONS:1}
+    default-replication-factor: ${KAFKA_DEFAULT_REPLICATION_FACTOR:1}
+    topics:
+      smartlock-mqtt-sensor-data:
+        name: smartlock.mqtt.sensorData.v0
+        category: STREAM
+        retention-days: 7
+      smartlock-device-operations:
+        name: smartlock.event.deviceOperations.v0
+        category: EVENT
+        retention-days: 30
+      smartlock-box-operation:
+        name: smartlock.event.boxOperation.v0
+        category: EVENT
+        retention-days: 30
+      smartlock-customer-transactions:
+        name: smartlock.event.customerTransactions.v0
+        category: EVENT
+        retention-days: 30
+      smartlock-sms-events:
+        name: smartlock.event.smsEvents.v0
+        category: EVENT
+        retention-days: 30
+      smartlock-payment-events:
+        name: smartlock.event.paymentEvents.v0
+        category: EVENT
+        retention-days: 30
+      smartlock-anomaly-alerts:
+        name: smartlock.anomaly.alerts.v0
+        category: ALERT
+        retention-days: 90
+      smartlock-anomaly-detection:
+        name: smartlock.anomaly.detection.v0
+        category: ANOMALY
+        retention-days: 90
+      smartlock-anomaly-sensor-data:
+        name: smartlock.anomaly.sensorData.v0
+        category: ANOMALY
+        retention-days: 90
+
+# MQTT Configuration
+mqtt:
+  broker:
+    url: ${MQTT_BROKER_URL:tcp://localhost:1883}
+  client:
+    id: smartlock-server
+  topic: selfpark/#
+
+# Monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: iot-device-management-platform
+
+logging:
+  level:
+    root: INFO
+    org.apache.kafka: WARN
+    org.hibernate: WARN
+    com.selftech.smartlock: DEBUG

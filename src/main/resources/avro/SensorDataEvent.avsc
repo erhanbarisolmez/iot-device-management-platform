@@ -1,0 +1,100 @@
+{
+  "namespace": "com.selftech.kafka.models.avro",
+  "type": "record",
+  "name": "SensorDataEvent",
+  "doc": "IoT sensor data event from MQTT devices with standard metadata enrichment",
+  "interfaces": ["com.selftech.kafka.core.event.Event"],
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string",
+      "doc": "Unique identifier for the event to ensure idempotency"
+    },
+    {
+      "name": "batteryLevel",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Battery level percentage (0-100)"
+    },
+    {
+      "name": "doorOpen",
+      "type": ["null", "boolean"],
+      "default": null,
+      "doc": "Door/lid open status"
+    },
+    {
+      "name": "weight",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Current weight in kg"
+    },
+    {
+      "name": "lockStatus",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Lock status: LOCKED, UNLOCKED, JAMMED"
+    },
+    {
+      "name": "temperature",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Temperature in Celsius"
+    },
+    {
+      "name": "humidity",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Humidity percentage (0-100)"
+    },
+    {
+      "name": "gpsCoordinates",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "GPS coordinates as 'lat,lng' string"
+    },
+    {
+      "name": "deviceStatus",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Overall device status: ONLINE, OFFLINE, ERROR"
+    },
+    {
+      "name": "timestamp",
+      "type": { "type": "long", "logicalType": "timestamp-millis" },
+      "doc": "Event creation time (epoch milliseconds)"
+    },
+    {
+      "name": "correlationId",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Distributed tracing correlation ID from ThreadLocal context"
+    },
+    {
+      "name": "eventType",
+      "type": "string",
+      "default": "SensorDataReceived",
+      "doc": "Event type: SensorDataReceived, SensorDataPublished"
+    },
+    {
+      "name": "source",
+      "type": "string",
+      "default": "SMARTLOCK",
+      "doc": "Event source domain identifier"
+    },
+    {
+      "name": "schemaVersion",
+      "type": "string",
+      "default": "1.0",
+      "doc": "Schema version for evolution tracking"
+    },
+    {
+      "name": "metadata",
+      "type": ["null", {
+        "type": "map",
+        "values": "string"
+      }],
+      "default": null,
+      "doc": "Additional custom metadata (e.g., deviceCode, location, mqtt_qos)"
+    }
+  ]
+}

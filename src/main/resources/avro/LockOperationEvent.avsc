@@ -1,0 +1,80 @@
+{
+  "namespace": "com.selftech.smartlock.kafka.events",
+  "type": "record",
+  "name": "LockOperationEvent",
+  "doc": "Lock operation event with standard metadata enrichment",
+  "interfaces": ["com.selftech.kafka.core.event.Event"],
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string",
+      "doc": "Unique identifier for the event to ensure idempotency"
+    },
+    {
+      "name": "operationId",
+      "type": ["null", "long"],
+      "default": null,
+      "doc": "ID of the related DeviceOperation, if applicable"
+    },
+    {
+      "name": "deviceId",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Identifier of the lock device, if applicable"
+    },
+    {
+      "name": "boxCode",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Identifier of the lock box, if applicable"
+    },
+    {
+      "name": "lockCode",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "One-time code for the operation, if applicable"
+    },
+    {
+      "name": "eventType",
+      "type": "string",
+      "doc": "The specific type of the event, e.g., 'INITIALIZE', 'BOX_OCCUPIED', 'LOCK_OPERATION'"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "doc": "The status resulting from the event: SUCCESS, FAILURE, PENDING"
+    },
+    {
+      "name": "timestamp",
+      "type": { "type": "long", "logicalType": "timestamp-millis" },
+      "doc": "Event creation time (epoch milliseconds)"
+    },
+    {
+      "name": "correlationId",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Distributed tracing correlation ID from ThreadLocal context"
+    },
+    {
+      "name": "source",
+      "type": "string",
+      "default": "SMARTLOCK",
+      "doc": "Event source domain identifier"
+    },
+    {
+      "name": "schemaVersion",
+      "type": "string",
+      "default": "1.0",
+      "doc": "Schema version for evolution tracking"
+    },
+    {
+      "name": "metadata",
+      "type": ["null", {
+        "type": "map",
+        "values": "string"
+      }],
+      "default": null,
+      "doc": "Additional custom metadata (e.g., userId, action, error_reason)"
+    }
+  ]
+}

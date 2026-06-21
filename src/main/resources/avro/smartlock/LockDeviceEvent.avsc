@@ -1,0 +1,100 @@
+{
+  "type": "record",
+  "name": "LockDeviceEvent",
+  "namespace": "com.selftech.smartlock.avro",
+  "doc": "Akıllı kilit cihazı ile ilgili tüm olaylar (oluşturma, durumu değişme, kilit açma/kapama, vb.)",
+  "interfaces": ["com.selftech.kafka.core.event.Event"],
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string",
+      "doc": "Olayın benzersiz kimliği (UUID) - idempotency ve tracing için"
+    },
+    {
+      "name": "deviceCode",
+      "type": "string",
+      "doc": "Kilit cihazının kodu (partition key)"
+    },
+    {
+      "name": "eventType",
+      "type": "string",
+      "doc": "Olay türü: DeviceCreated, DeviceStatusChanged, LockOpened, LockClosed, DeviceAssignedToBox, etc."
+    },
+    {
+      "name": "previousStatus",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Önceki durum (anomali tespiti için: pattern detection)"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "doc": "Yeni durum: AVAILABLE, IN_USE, LOCKED, UNLOCKED, RETURNED, MAINTENANCE, OUT_OF_SERVICE, AWAITING_PAYMENT, PAYMENT_CONFIRMED"
+    },
+    {
+      "name": "boxCode",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Cihazın bulunduğu kutu kodu (eğer kutudaysa)"
+    },
+    {
+      "name": "location",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Cihazın konumu (konum adı veya koordinatlar)"
+    },
+    {
+      "name": "userId",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "İşlemi yapan kullanıcı/personel ID"
+    },
+    {
+      "name": "vehicleId",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "İlişkili araç ID (eğer araç üzerinde ise)"
+    },
+    {
+      "name": "batteryLevel",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Cihazın pil seviyesi (%) - anomali tespiti için"
+    },
+    {
+      "name": "signalStrength",
+      "type": ["null", "int"],
+      "default": null,
+      "doc": "Ağ sinyal gücü (dBm) - bağlantı kalitesi"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Olayın oluş zamanı (milliseconds since epoch)"
+    },
+    {
+      "name": "correlationId",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Distributed tracing için correlation ID"
+    },
+    {
+      "name": "schemaVersion",
+      "type": "string",
+      "default": "1.0",
+      "doc": "Avro schema versiyonu (backward compatibility için)"
+    },
+    {
+      "name": "metadata",
+      "type": ["null", {
+        "type": "map",
+        "values": "string"
+      }],
+      "default": null,
+      "doc": "Ek bilgiler (custom fields, genişletilebilir)"
+    }
+  ]
+}

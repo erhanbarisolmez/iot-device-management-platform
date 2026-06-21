@@ -1,0 +1,120 @@
+{
+  "type": "record",
+  "name": "PaymentEvent",
+  "namespace": "com.selftech.smartlock.avro",
+  "doc": "Ödeme ile ilgili olaylar (ödeme başlatma, tamamlama, iade, vb.)",
+  "interfaces": ["com.selftech.kafka.core.event.Event"],
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string",
+      "doc": "Olayın benzersiz kimliği (UUID)"
+    },
+    {
+      "name": "paymentId",
+      "type": "string",
+      "doc": "Ödeme ID (Iyzico transaction ID)"
+    },
+    {
+      "name": "lockCode",
+      "type": "string",
+      "doc": "İlişkili kilit kodu"
+    },
+    {
+      "name": "deviceCode",
+      "type": "string",
+      "doc": "İlişkili cihaz kodu (partition key olabilir)"
+    },
+    {
+      "name": "eventType",
+      "type": "string",
+      "doc": "Olay türü: PaymentInitiated, PaymentCompleted, PaymentFailed, RefundProcessed, RefundFailed, etc."
+    },
+    {
+      "name": "amount",
+      "type": "double",
+      "doc": "Ödeme tutarı (TRY)"
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "default": "TRY",
+      "doc": "Para birimi"
+    },
+    {
+      "name": "previousStatus",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Önceki ödeme durumu"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "doc": "Yeni ödeme durumu: PENDING, COMPLETED, FAILED, REFUNDED"
+    },
+    {
+      "name": "userId",
+      "type": "string",
+      "doc": "Ödemeyi yapan kullanıcı ID"
+    },
+    {
+      "name": "paymentMethod",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Ödeme yöntemi: CREDIT_CARD, BANK_TRANSFER, etc."
+    },
+    {
+      "name": "failureReason",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Başarısızlık nedeni (eğer başarısızsa)"
+    },
+    {
+      "name": "depositAmount",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Depozito tutarı"
+    },
+    {
+      "name": "penaltyAmount",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Ceza tutarı"
+    },
+    {
+      "name": "lockFee",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Kilit ücreti"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Olayın oluş zamanı"
+    },
+    {
+      "name": "correlationId",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Distributed tracing için correlation ID"
+    },
+    {
+      "name": "schemaVersion",
+      "type": "string",
+      "default": "1.0",
+      "doc": "Avro schema versiyonu"
+    },
+    {
+      "name": "metadata",
+      "type": ["null", {
+        "type": "map",
+        "values": "string"
+      }],
+      "default": null,
+      "doc": "Ek bilgiler"
+    }
+  ]
+}

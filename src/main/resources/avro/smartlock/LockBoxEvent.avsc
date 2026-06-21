@@ -1,0 +1,137 @@
+{
+  "type": "record",
+  "name": "LockBoxEvent",
+  "namespace": "com.selftech.smartlock.avro",
+  "doc": "Akıllı kilit kutusu ile ilgili tüm olaylar (kapı açılması, ağırlık değişimi, bakım, vb.)",
+  "interfaces": ["com.selftech.kafka.core.event.Event"],
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string",
+      "doc": "Olayın benzersiz kimliği (UUID)"
+    },
+    {
+      "name": "boxCode",
+      "type": "string",
+      "doc": "Kutu kodu (partition key)"
+    },
+    {
+      "name": "eventType",
+      "type": "string",
+      "doc": "Olay türü: BoxCreated, BoxStatusChanged, BoxOpened, BoxClosed, WeightChanged, DoorOpen, Maintenance, etc."
+    },
+    {
+      "name": "previousStatus",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Önceki durum"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "doc": "Yeni durum: EMPTY, FULL, MAINTENANCE, OFFLINE"
+    },
+    {
+      "name": "doorOpen",
+      "type": "boolean",
+      "doc": "Kapı açık mı?"
+    },
+    {
+      "name": "currentWeight",
+      "type": "double",
+      "doc": "Mevcut ağırlık (kg) - sensör verisi"
+    },
+    {
+      "name": "previousWeight",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Önceki ağırlık (kg) - ağırlık anomali tespiti için"
+    },
+    {
+      "name": "expectedWeight",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Beklenen ağırlık (kg) - referans değer"
+    },
+    {
+      "name": "deviceCount",
+      "type": "int",
+      "default": 0,
+      "doc": "Kutuda bulunan cihaz sayısı"
+    },
+    {
+      "name": "deviceCodes",
+      "type": ["null", {
+        "type": "array",
+        "items": "string"
+      }],
+      "default": null,
+      "doc": "Kutuda bulunan cihazların kodları"
+    },
+    {
+      "name": "userId",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "İşlemi yapan kullanıcı/personel ID"
+    },
+    {
+      "name": "operationType",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "İşlem türü: CREATE, UPDATE, MAINTENANCE, etc."
+    },
+    {
+      "name": "temperature",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Kutu içi sıcaklık (°C) - sensör verisi"
+    },
+    {
+      "name": "humidity",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Kutu içi nem oranı (%) - sensör verisi"
+    },
+    {
+      "name": "gpsCoordinates",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "GPS koordinatları (latitude,longitude format)"
+    },
+    {
+      "name": "batteryLevel",
+      "type": ["null", "double"],
+      "default": null,
+      "doc": "Kutu pil seviyesi (%) - anomali tespiti için"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Olayın oluş zamanı"
+    },
+    {
+      "name": "correlationId",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Distributed tracing için correlation ID"
+    },
+    {
+      "name": "schemaVersion",
+      "type": "string",
+      "default": "1.0",
+      "doc": "Avro schema versiyonu"
+    },
+    {
+      "name": "metadata",
+      "type": ["null", {
+        "type": "map",
+        "values": "string"
+      }],
+      "default": null,
+      "doc": "Ek bilgiler"
+    }
+  ]
+}
